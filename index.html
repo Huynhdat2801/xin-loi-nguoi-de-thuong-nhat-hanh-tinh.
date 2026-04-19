@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>💗 Thư gửi Bảo Trân</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas"></script>
+
+  <style>
+    body {
+      background: #ffc0cb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial;
+    }
+
+    .envelope {
+      width: 300px;
+      height: 200px;
+      background: #ff99cc;
+      position: relative;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    .letter {
+      display: none;
+      background: #ffe4ec;
+      padding: 20px;
+      border-radius: 20px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      animation: fadeIn 1s ease forwards;
+    }
+
+    h1 {
+      color: #cc0066;
+    }
+
+    p {
+      color: #99004d;
+      line-height: 1.6;
+    }
+
+    .flower {
+      font-size: 35px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #ff4da6;
+      color: white;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.8);}
+      to {opacity: 1; transform: scale(1);}
+    }
+  </style>
+</head>
+<body>
+
+<div id="envelope" class="envelope" onclick="openLetter()">
+  💌 Bấm vào đây
+</div>
+
+<div id="letter" class="letter">
+  <h1>BẢO TRÂN 💗</h1>
+
+  <p>
+    Mình thật sự xin lỗi bạn...<br>
+    Mình biết mình đã làm bạn buồn và thất vọng.<br><br>
+
+    Mình không mong bạn bỏ qua ngay,<br>
+    chỉ mong có một cơ hội để sửa sai.<br><br>
+
+    Bạn rất quan trọng với mình 💗<br><br>
+
+    - Người luôn trân trọng bạn -
+  </p>
+
+  <div class="flower">🌸</div>
+  <div id="qrcode"></div>
+
+  <button onclick="downloadImage()">📥 Tải ảnh</button>
+</div>
+
+<script>
+  const message = `Bảo Trân à,
+
+Mình thật sự xin lỗi bạn...
+Mình biết mình đã làm bạn buồn.
+
+Nếu có thể,
+cho mình một cơ hội sửa sai nhé 💗
+
+Bạn rất quan trọng với mình.
+
+- Người luôn trân trọng bạn -`;
+
+  function openLetter() {
+    document.getElementById("envelope").style.display = "none";
+    document.getElementById("letter").style.display = "block";
+
+    QRCode.toCanvas(document.getElementById('qrcode'), message, {
+      width: 150,
+      color: { dark: "#ff4da6", light: "#ffffff" }
+    });
+  }
+
+  function downloadImage() {
+    html2canvas(document.getElementById("letter")).then(canvas => {
+      const link = document.createElement("a");
+      link.download = "thu_xin_loi.png";
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+  }
+</script>
+
+</body>
+</html>
